@@ -18,13 +18,13 @@
 
 const char* OpenCLSource[] = {
 
-"__kernel void VectorAdd(__global int* c, __global int* a,__global int* b)",
+"__kernel void VectorAdd(__global float* c, __global float* a,__global float* b)",
 
 "{",
 
 " // Index of the elements to add \n",
 
-" unsigned int n = get_global_id(0);",
+" float n = get_global_id(0);",
 
 " // Sum the nth element of vectors a and b and store in c \n",
 
@@ -36,9 +36,9 @@ const char* OpenCLSource[] = {
 
 // Some interesting data for the vectors
 
-int InitialData1[20] = {37,50,54,50,56,0,43,43,74,71,32,36,16,43,56,100,50,25,15,17};
+float InitialData1[20] = {37,50,54,50,56,0,43,43,74,71,32,36,16,43,56,100,50,25,15,17};
 
-int InitialData2[20] = {35,51,54,58,55,32,36,69,27,39,35,40,16,44,55,14,58,75,18,15};
+float InitialData2[20] = {35,51,54,58,55,32,36,69,27,39,35,40,16,44,55,14,58,75,18,15};
 
 // Number of elements in the vectors to be added
 
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
 
      // Two integer source vectors in Host memory
 
-     int HostVector1[SIZE], HostVector2[SIZE];
+     float HostVector1[SIZE], HostVector2[SIZE];
 
      //Output Vector
 
-     int HostOutputVector[SIZE];
+     float HostOutputVector[SIZE];
 
      // Initialize with some interesting repeating data
 
@@ -108,17 +108,17 @@ int main(int argc, char **argv)
 
      cl_mem GPUVector1 = clCreateBuffer(GPUContext, CL_MEM_READ_ONLY |
 
-     CL_MEM_COPY_HOST_PTR, sizeof(int) * SIZE, HostVector1, NULL);
+     CL_MEM_COPY_HOST_PTR, sizeof(float) * SIZE, HostVector1, NULL);
 
      cl_mem GPUVector2 = clCreateBuffer(GPUContext, CL_MEM_READ_ONLY |
 
-     CL_MEM_COPY_HOST_PTR, sizeof(int) * SIZE, HostVector2, NULL);
+     CL_MEM_COPY_HOST_PTR, sizeof(float) * SIZE, HostVector2, NULL);
 
      // Allocate output memory on GPU
 
      cl_mem GPUOutputVector = clCreateBuffer(GPUContext, CL_MEM_WRITE_ONLY,
 
-     sizeof(int) * SIZE, NULL, NULL);
+     sizeof(float) * SIZE, NULL, NULL);
 
      // Create OpenCL program with source code
 
@@ -154,7 +154,7 @@ int main(int argc, char **argv)
 
      clEnqueueReadBuffer(cqCommandQueue, GPUOutputVector, CL_TRUE, 0,
 
-     SIZE * sizeof(int), HostOutputVector, 0, NULL, NULL);
+     SIZE * sizeof(float), HostOutputVector, 0, NULL, NULL);
 
      // Cleanup
 
