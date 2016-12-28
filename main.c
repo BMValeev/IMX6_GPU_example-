@@ -24,11 +24,11 @@ const char* OpenCLSource[] = {
 
 " // Index of the elements to add \n",
 
-" float n = get_global_id(0);",
+" int n = get_global_id(0);",
 
 " // Sum the nth element of vectors a and b and store in c \n",
 
-" c[n] = a[n] + b[n];",
+" c[n] = a[n] * b[n];",
 
 "}"
 
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
      for( int i =0 ; i < SIZE; i++)
 
-          printf("[%d + %d = %d]\n",HostVector1[i], HostVector2[i], HostOutputVector[i]);
+          printf("[%g + %g = %g]\n",HostVector1[i], HostVector2[i], HostOutputVector[i]);
 
      return 0;
 
