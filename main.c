@@ -28,7 +28,7 @@ const char* OpenCLSource[] = {
 
 " // Sum the nth element of vectors a and b and store in c \n",
 
-" c[n] = a[n] * b[n];",
+" c[n] = exp( a[n]);",
 
 "}"
 
