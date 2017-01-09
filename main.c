@@ -28,7 +28,7 @@ const char* OpenCLSource[] = {
 
 " // Sum the nth element of vectors a and b and store in c \n",
 
-" c[n] = exp( a[n]);",
+" c[n] = cos(hypot( a[n] , b[n]));",
 
 "}"
 
@@ -42,7 +42,7 @@ float InitialData2[20] = {35,51,54,58,55,32,36,69,27,39,35,40,16,44,55,14,58,75,
 
 // Number of elements in the vectors to be added
 
-#define SIZE 100
+#define SIZE 20
 
 // Main function
 
